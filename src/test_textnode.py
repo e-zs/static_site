@@ -25,6 +25,11 @@ class TestTextNode(unittest.TestCase):
         node = TextNode('None URL', TextType.LINK)
         self.assertIsNone(node.url)
 
+    def test_not_TextNode(self):
+        node = TextNode('This is a text node', TextType.BOLD)
+        result = node.__eq__('not a text node')
+        self.assertIs(result, NotImplemented)
+
 
 if __name__ == "__main__":
     unittest.main()
