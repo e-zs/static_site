@@ -131,6 +131,14 @@ class TestParentNode(unittest.TestCase):
             "<h2><b>Bold text</b>Normal text<i>italic text</i>Normal text</h2>",
         )
 
+    def test_tag_valueError(self):
+        with self.assertRaises(ValueError):
+            ParentNode(None, [LeafNode("span", "x")]).to_html()
+    
+    def test_child_valueError(self):
+        with self.assertRaises(ValueError):
+            ParentNode("div", None).to_html()
+
 
 if __name__ == "__main__":
     unittest.main()
