@@ -82,7 +82,7 @@ class TestLeafNode(unittest.TestCase):
         self.assertEqual(node.to_html(), "Hello, world!")
 
     def test_leaf_to_html_no_value_raises(self):
-        node = LeafNode("p", None)  # type: ignore[arg-type]
+        node = LeafNode("p", None) # type: ignore[arg-type]
         with self.assertRaises(ValueError):
             node.to_html()
 
@@ -133,11 +133,11 @@ class TestParentNode(unittest.TestCase):
 
     def test_tag_valueError(self):
         with self.assertRaises(ValueError):
-            ParentNode(None, [LeafNode("span", "x")]).to_html()
+            ParentNode(None, [LeafNode("span", "x")]).to_html() # type: ignore[arg-type]
     
     def test_child_valueError(self):
         with self.assertRaises(ValueError):
-            ParentNode("div", None).to_html()
+            ParentNode("div", None).to_html() # type: ignore[arg-type]
 
 
 if __name__ == "__main__":
