@@ -1,5 +1,5 @@
 #python
-
+import re
 from textnode import TextNode, TextType
 
 def split_nodes_delimiter(old_nodes: list[TextNode], delimiter: str, text_type:TextType):
@@ -26,5 +26,14 @@ def split_nodes_delimiter(old_nodes: list[TextNode], delimiter: str, text_type:T
                 else:
                     new_nodes.append(TextNode(node_part, text_type))
                     
-
     return new_nodes
+
+def extract_markdown_images(text):
+    """Return list of (alt_text, url) for all markdown images in text."""
+    matches = re.findall(r'!\[([^\[\]]*)\]\(([^\(\)]*)\)', text)
+    return matches
+
+def extract_markdown_links(text):
+    """Return list of (alt_text, url) for all markdown links in text."""
+    matches = re.findall(r'(?<!!)\[([^\[\]]*)\]\(([^\(\)]*)\)', text)
+    return matches
