@@ -18,7 +18,7 @@ This is a single paragraph
     
     def test_blocks_split_on_single_line(self):
         md = '''
-        First paragraph
+First paragraph
 
 Second paragraph
 '''
@@ -57,9 +57,26 @@ Second paragraph
             ]
         )
 
-    def test_ignore_multiple_blank_lines(self):
+    def test_ignore_two_blank_lines(self):
         md = '''
 Paragraph before multiple lines
+
+
+Paragraph after multiple lines
+'''
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            [
+                'Paragraph before multiple lines',
+                'Paragraph after multiple lines',
+            ]
+        )
+
+    def test_ignore_three_blank_lines(self):
+        md = '''
+Paragraph before multiple lines
+
 
 
 Paragraph after multiple lines
@@ -102,5 +119,27 @@ This is a line with **bold** and _italic_ and a `code block`
                 'This is a line with **bold** and _italic_ and a `code block`',
                 '- This is the first list item\n- And this is the second list item',
                 '- And a new list with a new list item',
+            ]
+        )
+
+    def test_empty(self):
+        md = ''''''
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            [
+
+            ]
+        )
+
+    def test_whitespace(self):
+        md = '''
+
+'''
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            [
+
             ]
         )
