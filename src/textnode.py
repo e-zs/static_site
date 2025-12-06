@@ -27,10 +27,9 @@ class TextNode:
     
 
 
-def text_node_to_html_node(text_node: TextNode):
+def text_node_to_html_node(text_node: TextNode) -> LeafNode:
     if not isinstance(text_node.text_type, TextType):
         raise Exception('Error: unknown text type')
-
     if text_node.text_type == TextType.TEXT:
         node = LeafNode(None, text_node.text, None)
         return node
@@ -54,3 +53,5 @@ def text_node_to_html_node(text_node: TextNode):
         }
         node = LeafNode('img', '', prop)
         return node
+    
+    raise TypeError(f'Unepexted text_type: {text_node.text_type}')
